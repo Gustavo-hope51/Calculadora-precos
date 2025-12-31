@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Calculadora POD</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f3f3f3;
+    }
+
+    .container {
+      display: flex;
+      height: 100vh;
+    }
+
+    .left {
+      flex: 1;
+      background: #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: #555;
+    }
+
+    .right {
+      width: 420px;
+      background: #fffbe6;
+      padding: 24px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    h2 {
+      margin: 0;
+    }
+
+    .info {
+      font-size: 14px;
+      color: #333;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field label {
+      font-weight: bold;
+    }
+
+    .field input {
+      padding: 8px;
+      font-size: 16px;
+    }
+
+    .result {
+      margin-top: auto;
+      background: #a7ff5a;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .result p {
+      margin: 0;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .result span {
+      display: block;
+      margin-top: 10px;
+      font-size: 40px;
+      font-weight: bold;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      background: #2d2d00;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Lado esquerdo (imagem fake) -->
+    <div class="left">
+      Área da imagem do produto
+    </div>
+
+    <!-- Lado direito (calculadora) -->
+    <div class="right">
+      <h2>Escolha um produto</h2>
+      <div class="info">Custo de processamento: <b>US$ <span id="custo">9.64</span></b></div>
+
+      <div class="field">
+        <label>Venda por (US$)</label>
+        <input type="number" id="preco" value="20" />
+      </div>
+
+      <div class="field">
+        <label>Vendas diárias</label>
+        <input type="number" id="vendas" value="1" />
+      </div>
+
+      <div class="result">
+        <p>Seus ganhos mensais:</p>
+        <span id="ganhos">$ 0.00</span>
+        <button onclick="calcular()">Calcular</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function calcular() {
+      const preco = parseFloat(document.getElementById("preco").value);
+      const vendasDiarias = parseInt(document.getElementById("vendas").value);
+      const custo = parseFloat(document.getElementById("custo").innerText);
+
+      const lucroPorVenda = preco - custo;
+      const ganhosMensais = lucroPorVenda * vendasDiarias * 30;
+
+      document.getElementById("ganhos").innerText =
+        "$ " + ganhosMensais.toFixed(2);
+    }
+
+    // calcula automaticamente ao abrir
+    calcular();
+  </script>
+
+</body>
+</html>
